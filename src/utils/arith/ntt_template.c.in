@@ -2,9 +2,6 @@
 #define NTT_FUNC_NAME_1(x,A) NTT_FUNC_NAME_0(x,A)
 #define NTT_FUNC_NAME(x)     NTT_FUNC_NAME_1(x, NTT_NAME_EXT)
 
-const utils_arith_ntt_t *ntt_table;
-
-
 #ifdef _ENABLE_AVX2_INTRINSICS
 
 static SC_FORCE_INLINE __m256 int16_to_float(__m128i x)

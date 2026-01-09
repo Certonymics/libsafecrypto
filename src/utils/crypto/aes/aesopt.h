@@ -170,7 +170,7 @@ Issue Date: 20/12/2007
 #endif
 
 #if (defined( _WIN64 ) && defined( _MSC_VER )) \
- || (defined( __GNUC__ ) && defined( __x86_64__ )) \
+ || (defined( __GNUC__ ) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))) \
  && !(defined( INTEL_AES_POSSIBLE ))
 #  define INTEL_AES_POSSIBLE
 #endif
@@ -248,7 +248,7 @@ Issue Date: 20/12/2007
 
 #if defined( __i386 ) || defined( _M_IX86 )
 #  define A32_
-#elif defined( __x86_64__ ) || defined( _M_X64 )
+#elif (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__)) || defined( _M_X64 )
 #  define A64_
 #endif
 

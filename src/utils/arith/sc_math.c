@@ -40,7 +40,7 @@ volatile SINT32 sc_const_time_u16_lessthan(volatile UINT16 a, volatile UINT16 b)
 
 //------------------------------ Range limiting -------------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 SINT128 sc_mod_limit_s128(SINT128 x, SINT128 q)
 {
 #if defined(GNU_GCC_COMPILER) && (__STDC_VERSION__ >= 199901L)
@@ -296,7 +296,7 @@ FLOAT sc_exp_flt_taylor(FLOAT y)
 
 //------------------------------- LOG BASE 2 --------------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT32 sc_log2_128(UINT128 x)
 {
 #ifdef HAVE___BUILTIN_CLZ
@@ -395,7 +395,7 @@ UINT32 sc_log2_8(UINT8 x)
 
 size_t sc_log2(size_t x)
 {
-#ifdef __x86_64
+#if defined(__x86_64) || defined(__aarch64__) || defined(__arm64__)
     return sc_log2_64(x);
 #else
     return sc_log2_32(x);
@@ -405,7 +405,7 @@ size_t sc_log2(size_t x)
 
 //--------------------------- CEILING LOG BASE 2 ----------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT32 sc_ceil_log2_128(UINT128 x)
 {
     UINT32 log2 = sc_log2_128(x);
@@ -455,7 +455,7 @@ size_t sc_ceil_log2(size_t x)
 
 //------------------------------- BIT PARITY --------------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT32 sc_bit_parity_128(UINT128 x)
 {
 #ifdef HAVE___BUILTIN_PARITYLL
@@ -578,7 +578,7 @@ UINT8 sc_hamming_8(UINT8 x)
 
 //--------------------------- COUNT TRAILING ZEROS --------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT32 sc_ctz_128(UINT128 x)
 {
     UINT64 ctz = sc_ctz_64((UINT64)x);
@@ -665,7 +665,7 @@ UINT32 sc_ctz_8(UINT8 x)
 
 //--------------------------- COUNT LEADING ZEROS ---------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT32 sc_clz_128(UINT128 x)
 {
     UINT64 clz = sc_clz_64((UINT64)(x >> 64));
@@ -756,7 +756,7 @@ UINT32 sc_clz_8(UINT8 x)
 
 //------------------------------- BIT REVERSAL ------------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT128 sc_bit_reverse_128(UINT128 x)
 {
 #ifdef __arm__
@@ -847,7 +847,7 @@ UINT8 sc_bit_reverse_8(UINT8 x)
 
 size_t sc_bit_reverse(size_t x)
 {
-#ifdef __x86_64
+#if defined(__x86_64) || defined(__aarch64__) || defined(__arm64__)
     return sc_bit_reverse_64(x);
 #else
     return sc_bit_reverse_32(x);
@@ -857,7 +857,7 @@ size_t sc_bit_reverse(size_t x)
 
 //------------------------------- BIT ROTATION ------------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT128 sc_rotl_128(UINT128 w, SINT32 n)
 {
     SINT32 bits = n & 0x7F;
@@ -926,7 +926,7 @@ SINT32 sc_arr_rotl_32(UINT32 *w, size_t n, SINT32 m)
 
 //---------------------- UNSIGNED INTEGER SQUARE ROOT -----------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT128 sqrt_u128(UINT128 x)
 {
     register UINT128 op, res, one;
@@ -1043,7 +1043,7 @@ UINT8 sqrt_u8(UINT8 x)
 
 //----------------------- BINARY FRACTION EXPANSION -------------------------//
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT128 get_binary_expansion_fraction_128(DOUBLE x)
 {
     size_t i;

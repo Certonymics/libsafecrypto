@@ -50,7 +50,7 @@ extern "C" {
 #define UINT64     uint64_t
 #endif
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 typedef __int128 int128_t;
 typedef unsigned __int128 uint128_t;
 #define SINT128    int128_t

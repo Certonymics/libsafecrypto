@@ -69,7 +69,7 @@ UINT64 prng_get_out_bytes(prng_ctx_t *ctx);
 /// Extract a bit from the PRNG
 SINT32 prng_bit(prng_ctx_t *ctx);
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 /// Extract a 128-bit unsigned integer from the PRNG
 UINT128 prng_128(prng_ctx_t *ctx);
 #endif

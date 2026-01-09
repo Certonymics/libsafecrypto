@@ -78,7 +78,7 @@ typedef union
 
 #if defined(_MSC_VER) && defined(_WIN64)
 #define ALIGNED_(x) __declspec(align(x))
-#elif defined(__GNUC__) && defined(__x86_64__)
+#elif defined(__GNUC__) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 #define ALIGNED_(x) __attribute__ ((aligned(x)))
 #else
 #define ALIGNED_(x)

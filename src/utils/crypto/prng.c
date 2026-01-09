@@ -946,7 +946,7 @@ SINT32 prng_bit(prng_ctx_t *ctx)
     return (SINT32) prng_var(ctx, 1);
 }
 
-#if defined(HAVE_128BIT) && defined(__x86_64__)
+#if defined(HAVE_128BIT) && (defined(__x86_64__) || defined(__aarch64__) || defined(__arm64__))
 UINT128 prng_128(prng_ctx_t *ctx)
 {
     UINT128 u128;

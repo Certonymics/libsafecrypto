@@ -669,7 +669,13 @@ DOUBLE gram_schmidt_norm(SINT32 *f, SINT32 *g, size_t n,
 
     SC_FREE(f2, sizeof(DOUBLE) * 2 * n);
 
-    if (b_N1 < 0 || isnanl(b_N1)) {
+    if (b_N1 < 0 ||
+#ifdef __APPLE__
+        isnan(b_N1)
+#else
+        isnanl(b_N1)
+#endif
+    ) {
 
         return 2*bd;
     }
@@ -1560,7 +1566,13 @@ step2:
 
     // Step 3. calculate the GramSchmidt norm
     gs_norm = gram_schmidt_norm(f, g, n, q, bd);
-    if (isnanl(gs_norm)) {
+    if (
+#ifdef __APPLE__
+        isnan(gs_norm)
+#else
+        isnanl(gs_norm)
+#endif
+    ) {
         num_retries++;
         goto step2;
     }
@@ -2119,7 +2131,13 @@ step2:
 
     // Step 3. calculate the GramSchmidt norm
     gs_norm = gram_schmidt_norm(f, g, n, q, bd);
-    if (isnanl(gs_norm)) {
+    if (
+#ifdef __APPLE__
+        isnan(gs_norm)
+#else
+        isnanl(gs_norm)
+#endif
+    ) {
         num_retries++;
         goto step2;
     }

@@ -18,6 +18,11 @@
 #include "packer.h"
 #if defined(__linux__) || defined(_WIN32)
 #include <arpa/inet.h>
+#elif defined(__APPLE__)
+#include <arpa/inet.h>
+#include <libkern/OSByteOrder.h>
+#define htobe64(x) OSSwapHostToBigInt64(x)
+#define be64toh(x) OSSwapBigToHostInt64(x)
 #else
 
 uint32_t htonl(uint32_t hostlong)

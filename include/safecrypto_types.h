@@ -127,7 +127,7 @@ typedef unsigned __int128 uint128_t;
 
 /// Macro's used for structure packing and alignment
 /**@{*/
-#if 0
+#ifdef __APPLE__
 #define SC_STRUCT_PACK_START
 #define SC_STRUCT_PACKED
 #define SC_STRUCT_PACK_END

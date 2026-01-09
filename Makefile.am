@@ -1,4 +1,4 @@
-ACLOCAL_AMFLAGS = -I m4 -I /usr/share/aclocal
+ACLOCAL_AMFLAGS = -I m4 -I /opt/homebrew/share/aclocal
 include aminclude.am
 
 if !WITH_BAREMETAL

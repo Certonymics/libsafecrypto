@@ -56,6 +56,12 @@ typedef struct ntt_params_t ntt_params_t;
  */
 typedef struct falcon_keygen_ falcon_keygen;
 
+unsigned
+mod2_res_ternary(const int32_t *f, unsigned logn);
+
+void
+poly_small_to_fp(DOUBLE *x, const int32_t *f, unsigned logn, unsigned ter);
+
 /*
  * Create a new falcon key generation context.
  *

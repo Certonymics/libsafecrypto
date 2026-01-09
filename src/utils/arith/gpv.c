@@ -29,6 +29,7 @@
 #include "poly_fft.h"
 #include "utils/arith/falcon_fft.h"
 #include "utils/arith/falcon_ldl.h"
+#include "utils/arith/falcon_keygen.h"
 
 #include "schemes/sig/falcon/falcon_params.h"
 #include "schemes/sig/ens_dlp/ens_dlp_sig_params.h"

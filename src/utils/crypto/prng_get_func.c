@@ -24,7 +24,7 @@
 #if defined( __linux__ ) || defined( __GNUC__ ) || defined( __GNU_LIBRARY__ )
 #include <unistd.h>
 #include <sys/syscall.h>
-#include <linux/random.h>
+// #include <linux/random.h> UNUSED
 #else // WINDOWS
 #include <Windows.h>
 #include <wincrypt.h>

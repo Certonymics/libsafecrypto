@@ -13,7 +13,7 @@ EXTRA_DIST  = docs/Resources/SAFEcrypto.png \
               docs/Resources/SAFEcrypto_structure.png \
               README.md \
               LICENSE \
-              version
+			  version.txt
 
 dist_bin_SCRIPTS = build_tools/ntt_table_gen/ntt_table_gen.sh \
                    setup_version.sh \
@@ -72,8 +72,8 @@ style_info:
 	sh $(srcdir)/style_info.sh $(distdir) test
 
 # Create the version information header file
-setup_version: version
-	sh $(srcdir)/setup_version.sh version src/safecrypto_version.h
+setup_version: version.txt
+	sh $(srcdir)/setup_version.sh version.txt src/safecrypto_version.h
 
 # Create the NTT tables source code
 setup_ntt:

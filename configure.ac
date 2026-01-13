@@ -4,7 +4,7 @@
 
 AC_PREREQ([2.69])
 
-AC_INIT([SAFEcrypto], m4_esyscmd([tr -d '\n' < version]), [n.smyth@qub.ac.uk])
+AC_INIT([SAFEcrypto], m4_esyscmd([tr -d '\n' < version.txt]), [n.smyth@qub.ac.uk])
 AC_CONFIG_AUX_DIR([.])
 
 # Version-info specifications.  Update the table below for ANY change of version number.

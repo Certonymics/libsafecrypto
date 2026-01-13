@@ -117,7 +117,7 @@ unit_packer_LDADD              = $(top_builddir)/libs/libsafecrypto.la @CHECK_LI
 #                                 $(top_srcdir)/src/safecrypto_debug.h
 #unit_bac_CFLAGS                = -I$(top_srcdir)/src -I$(top_srcdir)/include -I$(top_srcdir)/src/utils/crypto @CHECK_CFLAGS@
 #unit_bac_LDFLAGS               = -pthread
-#unit_bac_LDADD                 = $(top_builddir)/libs/libsafecrypto.la @CHECK_LIBS@ -lm -lrt -lsubunit
+#unit_bac_LDADD                 = $(top_builddir)/libs/libsafecrypto.la @CHECK_LIBS@ -lm
 
 unit_exp_golomb_SOURCES        = unit_exp_golomb.c \
                                  $(top_srcdir)/src/safecrypto_debug.h

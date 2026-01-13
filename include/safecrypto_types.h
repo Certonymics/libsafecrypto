@@ -254,7 +254,7 @@ typedef enum safecrypto_prng {
 } safecrypto_prng_e;
 
 /// An enum defining the various types of CSPRNG
-extern const char *safecrypto_prng_names [16];
+extern const char *safecrypto_prng_names [15];
 
 /// A function pointer used to provide PRNG entropy using a callback function
 typedef void (*safecrypto_prng_entropy_callback)(size_t, UINT8 *);

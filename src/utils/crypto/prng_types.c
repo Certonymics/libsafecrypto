@@ -21,8 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const char *safecrypto_prng_names [16] = {
-    "SC_PRNG_SYSTEM",
+const char *safecrypto_prng_names [15] = {
     "SC_PRNG_AES_CTR_DRBG",
     "SC_PRNG_AES_CTR",
     "SC_PRNG_CHACHA",

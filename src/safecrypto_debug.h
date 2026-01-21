@@ -55,6 +55,7 @@ extern sc_debug_level_e sc_get_verbosity(safecrypto_t *sc);
 
 /// @name Macro functions for basic profiling of code
 /**@{*/
+#ifndef ENABLE_BAREMETAL
 #define SC_TIMER_INSTANCE(t)         void *t = NULL
 #define SC_TIMER_CREATE(t)           t = sc_timer_create()
 #define SC_TIMER_DESTROY(t)          sc_timer_delete(&t)
@@ -66,6 +67,19 @@ extern sc_debug_level_e sc_get_verbosity(safecrypto_t *sc);
 #define SC_TIMER_GET_SECS(t)         sc_timer_diff_secs(t)
 #define SC_TIMER_GET_NSEC(t)         sc_timer_diff_nsec(t)
 #define SC_TIMER_PRINT_STRING(t,m)   sc_timer_print_diff_string(t, m)
+#else
+#define SC_TIMER_INSTANCE(t)         ((void)0)
+#define SC_TIMER_CREATE(t)           ((void)0)
+#define SC_TIMER_DESTROY(t)          ((void)0)
+#define SC_TIMER_RESET(t)            ((void)0)
+#define SC_TIMER_START(t)            ((void)0)
+#define SC_TIMER_STOP(t)             ((void)0)
+#define SC_TIMER_CONTINUE(t)         ((void)0)
+#define SC_TIMER_GET_ELAPSED(t)      (0.0)
+#define SC_TIMER_GET_SECS(t)         (0.0)
+#define SC_TIMER_GET_NSEC(t)         (0.0)
+#define SC_TIMER_PRINT_STRING(t,m)   ((void)0)
+#endif
 /**@}*/
 
 #ifdef DEBUG

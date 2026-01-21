@@ -86,15 +86,8 @@ AM_PATH_PYTHON(,, [:])
 AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
 
 
-if test -z $CFLAGS; then
-    CFLAGS='-O2 -fomit-frame-pointer -march=native'
-fi
-AC_PROG_CC([gcc])
-AC_PROG_CC_C99
-if test -z $CXXFLAGS; then
-    CXXFLAGS='-O2'
-fi
-AC_PROG_CXX([g++])
+AC_PROG_CC
+AC_PROG_CXX
 
 # Set the default language to C
 AC_LANG([C++])

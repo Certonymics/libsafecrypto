@@ -3,10 +3,9 @@ include aminclude.am
 
 if !WITH_BAREMETAL
 MAYBE_BINDINGS=bindings
-MAYBE_BUILD_TOOLS=build_tools
 endif !WITH_BAREMETAL
 
-SUBDIRS     = $(MAYBE_BUILD_TOOLS) . docs/Doxygen src $(MAYBE_BINDINGS) test
+SUBDIRS     = build_tools . docs/Doxygen src $(MAYBE_BINDINGS) test
 
 EXTRA_DIST  = docs/Resources/SAFEcrypto.png \
               docs/Resources/SAFEcrypto_small.png \

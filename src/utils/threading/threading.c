@@ -243,8 +243,8 @@ sc_thread_t * thread_create_posix(void * (*routine)(void *),
 
     // If CPU pinning is enabled then assign the processor to this thread
     if (-1 != cpu) {
-    #ifdef __APPLE__
-        // macOS does not support thread affinity settings
+    #if defined(__APPLE__) || defined(__ANDROID__)
+        // Only linux supports thread affinity settings
         (void) cpu;
     #else
         cpu_set_t cpus;

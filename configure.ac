@@ -527,6 +527,14 @@ AC_ARG_ENABLE([multithreading],
     [enable_multithreading=$enableval],
     [enable_multithreading="yes"])
 
+# Debug output
+# Disable linking pthread on iOS and Android
+case "$host_os" in
+    *android* | *darwin*ios* | ios*)
+        enable_multithreading="no"
+        ;;
+esac
+
 AM_CONDITIONAL([WITH_MULTITHREADING], [test "x${enable_multithreading}" = "xyes"])
 if test "x${enable_multithreading}" = "xyes"; then
     AC_SUBST([AM_CPPFLAGS], ["$AM_CPPFLAGS -DHAVE_MULTITHREADING"])

@@ -283,7 +283,7 @@ SINT32 dlp_ibe_create(safecrypto_t *sc, SINT32 set, const UINT32 *flags)
     sc->dlp_ibe->params->w = temp;
     sc->dlp_ibe->params->r = temp + n;
     roots_of_unity_s32(sc->dlp_ibe->params->w, sc->dlp_ibe->params->r,
-        n, sc->dlp_ibe->params->q, sc->dlp_ibe->params->nth_root_of_unity);
+        n, sc->dlp_ibe->params->q, sc->dlp_ibe->params->nth_root_of_unity, 0);
 #endif
 
     // Dynamically allocate memory for temporary storage

@@ -36,7 +36,9 @@
 #include "schemes/ibe/dlp/dlp_ibe_params.h"
 
 #define NTT_NEEDS_12289
+#ifndef USE_RUNTIME_NTT_TABLES
 #include "utils/arith/ntt_tables.h"
+#endif
 
 #include <math.h>
 

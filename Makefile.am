@@ -5,7 +5,18 @@ if !WITH_BAREMETAL
 MAYBE_BINDINGS=bindings
 endif !WITH_BAREMETAL
 
-SUBDIRS     = build_tools . docs/Doxygen src $(MAYBE_BINDINGS) test
+if !USE_RUNTIME_NTT_TABLES
+MAYBE_BUILD_TOOLS=build_tools
+MAYBE_SETUP_NTT=setup_ntt
+
+# Create the NTT tables source code
+setup_ntt:
+	sh $(srcdir)/build_tools/ntt_table_gen/ntt_table_gen.sh $(srcdir)/src/utils/arith/ntt_tables
+endif
+
+all-local: setup_version $(MAYBE_SETUP_NTT)
+
+SUBDIRS     = $(MAYBE_BUILD_TOOLS) . docs/Doxygen src $(MAYBE_BINDINGS) test
 
 EXTRA_DIST  = docs/Resources/SAFEcrypto.png \
               docs/Resources/SAFEcrypto_small.png \
@@ -74,11 +85,6 @@ style_info:
 setup_version: version.txt
 	sh $(srcdir)/setup_version.sh version.txt src/safecrypto_version.h
 
-# Create the NTT tables source code
-setup_ntt:
-	sh $(srcdir)/build_tools/ntt_table_gen/ntt_table_gen.sh $(srcdir)/src/utils/arith/ntt_tables
-
-all-local: setup_version setup_ntt
 clean-local:
 	rm -rf ./src/safecrypto_version.h
 

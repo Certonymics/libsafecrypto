@@ -1,14 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4
 
-ifeq ($(shell uname -s),Darwin)
-	BREW_PREFIX := $(shell brew --prefix 2>/dev/null || true)
-	ifneq ($(BREW_PREFIX),)
-		ACLOCAL_AMFLAGS += -I ${BREW_PREFIX}/share/aclocal
-	endif
-else
-	ACLOCAL_AMFLAGS += -I /usr/share/aclocal
-endif
-
 include aminclude.am
 
 if !WITH_BAREMETAL

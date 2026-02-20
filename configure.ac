@@ -99,6 +99,7 @@ AM_PROG_AR
 # Initialize libtool
 LT_PREREQ([2.4])
 LT_INIT([shared static])
+AM_CONDITIONAL([BUILD_SHARED], [test "x$enable_shared" = "xyes"])
 
 AC_CONFIG_FILES([build_tools/ntt_table_gen/ntt_table_gen.sh], [chmod +x build_tools/ntt_table_gen/ntt_table_gen.sh])
 AC_CONFIG_FILES([setup_version.sh], [chmod +x setup_version.sh])

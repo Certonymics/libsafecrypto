@@ -1,4 +1,7 @@
-noinst_PROGRAMS = helloworld_shared helloworld_static
+noinst_PROGRAMS = helloworld_static
+if BUILD_SHARED
+noinst_PROGRAMS += helloworld_shared
+endif BUILD_SHARED
 
 # Common settings for the helloworld executable
 HELLOWORLD_LIBS = -L$(top_builddir)/libs -lsafecrypto -lm

@@ -1,4 +1,7 @@
-noinst_PROGRAMS = SAFEcryptoTest_CPP_shared SAFEcryptoTest_CPP_static
+noinst_PROGRAMS = SAFEcryptoTest_CPP_static
+if BUILD_SHARED
+noinst_PROGRAMS += SAFEcryptoTest_CPP_shared 
+endif BUILD_SHARED
 
 # Common settings for the helloworld executable
 SAFECRYPTO_LIBS = -L$(top_builddir)/libs -lsafecrypto -lm

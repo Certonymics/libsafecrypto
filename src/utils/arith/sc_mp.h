@@ -51,7 +51,7 @@
 typedef UINT128 sc_ulimb_big_t;
 typedef SINT128 sc_slimb_big_t;
 typedef UINT64 sc_ulimb_t;
-typedef INT64 sc_slimb_t;
+typedef SINT64 sc_slimb_t;
 typedef UINT32 sc_ulimb_half_t;
 typedef SINT32 sc_slimb_half_t;
 
@@ -69,7 +69,7 @@ typedef SINT32 sc_slimb_half_t;
 typedef UINT64 sc_ulimb_big_t;
 typedef SINT64 sc_slimb_big_t;
 typedef UINT32 sc_ulimb_t;
-typedef INT32 sc_slimb_t;
+typedef SINT32 sc_slimb_t;
 typedef UINT16 sc_ulimb_half_t;
 typedef SINT16 sc_slimb_half_t;
 

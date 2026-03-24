@@ -72,6 +72,31 @@
 #endif
 #endif
 
+#ifdef USE_RUNTIME_NTT_TABLES
+#include <pthread.h>
+static pthread_once_t init_ntt_table_0_once = PTHREAD_MUTEX_INITIALIZER;
+static pthread_once_t init_ntt_table_1_once = PTHREAD_MUTEX_INITIALIZER;
+void init_ntt_table(dlp_ibe_set_t *params)
+{
+    SINT32 *temp = (SINT32*) SC_MALLOC(sizeof(SINT32) * 2 * params->n);
+    params->w = temp;
+    params->r = temp + params->n;
+    roots_of_unity_s32(params->w, params->r,
+        params->n, params->q, params->nth_root_of_unity, 0);
+}
+
+void init_ntt_table_0()
+{
+    init_ntt_table(&param_dlp_ibe_0);
+}
+
+void init_ntt_table_1()
+{
+    init_ntt_table(&param_dlp_ibe_1);
+}
+
+
+#endif
 
 SINT32 dlp_ibe_create(safecrypto_t *sc, SINT32 set, const UINT32 *flags)
 {
@@ -133,10 +158,18 @@ SINT32 dlp_ibe_create(safecrypto_t *sc, SINT32 set, const UINT32 *flags)
     // Initialise the SAFEcrypto struct with the specified IBE parameter set
     switch (set)
     {
-        case 0:  sc->dlp_ibe->params = &param_dlp_ibe_0;
+        case 0:  
+#ifdef USE_RUNTIME_NTT_TABLES
+                 pthread_once(&init_ntt_table_0_once, init_ntt_table_0);
+#endif
+                 sc->dlp_ibe->params = &param_dlp_ibe_0;
                  sc->dlp_ibe->entropy = sc->coding_encryption.type;
                  break;
-        case 1:  sc->dlp_ibe->params = &param_dlp_ibe_1;
+        case 1:  
+#ifdef USE_RUNTIME_NTT_TABLES
+                 pthread_once(&init_ntt_table_1_once, init_ntt_table_1);
+#endif
+                 sc->dlp_ibe->params = &param_dlp_ibe_1;
                  sc->dlp_ibe->entropy = sc->coding_encryption.type;
                  break;
 #if 0
@@ -277,15 +310,6 @@ SINT32 dlp_ibe_create(safecrypto_t *sc, SINT32 set, const UINT32 *flags)
     }
     sc->sampler = NULL;
 
-#ifdef USE_RUNTIME_NTT_TABLES
-    // Dynamically allocate memory for the necessary NTT tables
-    SINT32 *temp = (SINT32*) SC_MALLOC(sizeof(SINT32) * 2 * n);
-    sc->dlp_ibe->params->w = temp;
-    sc->dlp_ibe->params->r = temp + n;
-    roots_of_unity_s32(sc->dlp_ibe->params->w, sc->dlp_ibe->params->r,
-        n, sc->dlp_ibe->params->q, sc->dlp_ibe->params->nth_root_of_unity, 0);
-#endif
-
     // Dynamically allocate memory for temporary storage
     sc->temp_size = (DLP_IBE_NUM_TEMP_POLYNOMIALS * n) * sizeof(SINT32);
     if (!sc->temp_external_flag) {
@@ -295,9 +319,6 @@ SINT32 dlp_ibe_create(safecrypto_t *sc, SINT32 set, const UINT32 *flags)
             utils_crypto_xof_destroy(sc->xof);
             destroy_sampler(&sc->sc_gauss);
             SC_FREE(sc->dlp_ibe, sizeof(dlp_ibe_cfg_t));
-#ifdef USE_RUNTIME_NTT_TABLES
-            SC_FREE(temp, sizeof(SINT32) * 2 * n);
-#endif
             return SC_FUNC_FAILURE;
         }
     }
@@ -323,10 +344,6 @@ SINT32 dlp_ibe_destroy(safecrypto_t *sc)
     if (!sc->temp_external_flag) {
         SC_FREE(sc->temp, sc->temp_size);
     }
-
-#ifdef USE_RUNTIME_NTT_TABLES
-    SC_FREE(sc->dlp_ibe->params->w, sizeof(SINT32) * 2 * n);
-#endif
 
     // Free all resources associated with key-pair and signature
     if (sc->privkey->key) {

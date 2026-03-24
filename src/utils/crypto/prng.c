@@ -148,7 +148,11 @@ static SINT32 init_rand()
     // (e.g. C90, gnu90)
 
     struct timespec ts;
+#ifdef __ANDROID__
+    if (clock_gettime(CLOCK_REALTIME, &ts) != 0) {
+#else
     if (timespec_get(&ts, TIME_UTC) == 0) {
+#endif
         return SC_CREATE_ERROR;
     }
 

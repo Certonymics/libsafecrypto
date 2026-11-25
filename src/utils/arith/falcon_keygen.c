@@ -4923,7 +4923,7 @@ solve_NTRU_intermediate(falcon_keygen *fk,
 		 * manage to reduce the maximum bit length.
 		 */
 		if (maxbl_FG <= maxbl_fg || maxbl_FG >= prev_maxbl_FG) {
-			fprintf(stderr, "scaling ended %d %d %d\n", maxbl_fg, maxbl_FG , prev_maxbl_FG);
+			//fprintf(stderr, "scaling ended %d %d %d\n", maxbl_fg, maxbl_FG , prev_maxbl_FG);
 			break;
 		}
 		prev_maxbl_FG = maxbl_FG;
@@ -5966,7 +5966,7 @@ int solve_NTRU(falcon_keygen *fk, int32_t *F, int32_t *G,
 	n = MKN(logn, fk->ternary);
 
 	if (!solve_NTRU_deepest(fk, f, g)) {
-		fprintf(stderr, "Failed to solve deepest\n");
+		//fprintf(stderr, "Failed to solve deepest\n");
 		return 0;
 	}
 

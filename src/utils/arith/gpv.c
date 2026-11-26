@@ -42,7 +42,7 @@
 
 #include <math.h>
 
-#define DEBUG_GPV               1
+#define DEBUG_GPV               0
 #define CRT_NTRU_SOLVE          1
 
 
